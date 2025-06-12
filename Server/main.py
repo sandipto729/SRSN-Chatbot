@@ -13,13 +13,14 @@ from langchain.chat_models import init_chat_model
 # Load environment
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 if not groq_api_key:
     raise ValueError("GROQ_API_KEY is not set in your .env file.")
 os.environ["GROQ_API_KEY"] = groq_api_key
 
 # Flask setup
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["http://localhost:5173"]}})
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": FRONTEND_URL}})
 
 # Load existing vectorstore (Chroma) from disk
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")

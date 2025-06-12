@@ -68,12 +68,12 @@ def process_url():
         memory = ConversationBufferWindowMemory(
             memory_key="chat_history",
             return_messages=True,
-            k=5,
+            k=2,
             output_key="result"
         )
 
         # Retriever and QA chain
-        retriever = vectorstore.as_retriever(search_kwargs={"k": 2})
+        retriever = vectorstore.as_retriever(search_kwargs={"k": 1})
         qa = RetrievalQA.from_chain_type(
             llm=model,
             chain_type="stuff",
@@ -95,5 +95,6 @@ def process_url():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    port = int(os.environ.get("PORT", 8000))
-    app.run(host="0.0.0.0", port=port)
+    port = int(os.environ.get("PORT", 10000))
+    app.run(host="0.0.0.0", port=port, debug=True)
+  

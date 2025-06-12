@@ -1,31 +1,17 @@
-# Core backend
-Flask==2.3.3
-flask-cors==4.0.0
-python-dotenv==1.0.1
+Flask
+flask-cors
+python-dotenv
 
-# LangChain & components
-langchain==0.1.17
-langchain-community==0.0.36
-langchain-core==0.1.48
-langchain-groq>=0.0.1
+langchain
+langchain-community
+langchain-core
+langchain-groq
 
+sentence-transformers
+chromadb
+huggingface-hub
 
+unstructured
+beautifulsoup4
 
-# Embeddings
-# Embeddings
-sentence-transformers==2.2.2
-huggingface_hub==0.16.4
-transformers==4.40.0
-torch>=2.0.0
-
-
-
-# Vector store
-chromadb==0.4.24
-
-# For GROQ support via LangChain
-groq==0.5.0  
-
-# Utility
-pydantic==2.6.4
-requests==2.31.0
+tqdm

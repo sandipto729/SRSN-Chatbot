@@ -1,28 +1,21 @@
 # Core backend
-Flask==2.3.3
-flask-cors==4.0.0
-python-dotenv==1.0.1
+Flask
+flask-cors
+python-dotenv
 
 # LangChain & components
-langchain==0.1.17
-langchain-community==0.0.36
-langchain-core==0.1.40
+langchain
+langchain-community
+
 
 # Embeddings
-sentence-transformers==2.2.2
-transformers==4.40.0
-torch>=2.0.0
+sentence-transformers
+transformers
+
 
 # Vector store
-chromadb==0.4.24
+chromadb
 
 # Optional: URL document loading support
-unstructured==0.12.6
-requests==2.31.0
-
-# For LLMs via Groq
-openai==1.30.1  # Sometimes needed internally
-tiktoken==0.6.0
-
-# (Optional but common utility)
-pydantic==2.6.4
+unstructured
+requests

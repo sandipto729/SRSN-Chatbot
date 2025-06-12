@@ -91,3 +91,4 @@ def process_url():
 
 if __name__ == "__main__":
     app.run(debug=True)
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["*"]}})

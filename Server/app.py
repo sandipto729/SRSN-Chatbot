@@ -41,7 +41,7 @@ def process_url():
 
         # Load existing vectorstore (Chroma) from disk
         embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L3-v2")
-        vectorstore = Chroma(persist_directory="./chroma_doc_db", embedding_function=embedding, read_only=True)
+        vectorstore = Chroma(persist_directory="./chroma_doc_db", embedding_function=embedding)
         # Initialize LLM
         model = ChatGroq(
             model_name="llama3-8b-8192",

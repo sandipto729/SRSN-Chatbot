@@ -22,7 +22,7 @@ os.environ["GROQ_API_KEY"] = groq_api_key
 
 # Flask setup
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": FRONTEND_URL}})
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["http://localhost:5173", "https://sriramkrishnasikshaniketan.me", FRONTEND_URL]}})
 
 
 

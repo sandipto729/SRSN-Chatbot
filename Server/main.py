@@ -8,22 +8,25 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
-from langchain.chat_models import init_chat_model
+from langchain_groq import ChatGroq
+
+
 
 # Load environment
 load_dotenv()
 groq_api_key = os.getenv("GROQ_API_KEY")
+FRONTEND_URL = os.getenv("FRONTEND_URL")
 if not groq_api_key:
     raise ValueError("GROQ_API_KEY is not set in your .env file.")
 os.environ["GROQ_API_KEY"] = groq_api_key
 
 # Flask setup
 app = Flask(__name__)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["http://localhost:5173"]}})
+CORS(app, supports_credentials=True, resources={r"/*": {"origins": FRONTEND_URL}})
 
 # Load existing vectorstore (Chroma) from disk
 embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-vectorstore = Chroma(persist_directory="./chroma_doc_db", embedding_function=embedding)
+vectorstore = Chroma(persist_directory="./chroma_doc_db", embedding_function=embedding, read_only=True)
 
 @app.route('/')
 def index():
@@ -38,13 +41,13 @@ def process_url():
 
     try:
         # Initialize LLM
-        model = init_chat_model(
-            "llama3-8b-8192",
-            model_provider="groq",
+        model = ChatGroq(
+            model_name="llama3-8b-8192",
+            api_key=groq_api_key,
             temperature=0.6,
-            max_tokens=512,
-            api_key=groq_api_key
+            max_tokens=512
         )
+
 
         # Prompt template
         prompt_template = PromptTemplate(
@@ -90,5 +93,5 @@ def process_url():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
-CORS(app, supports_credentials=True, resources={r"/*": {"origins": ["*"]}})
+    port = int(os.environ.get("PORT", 8000))
+    app.run(host="0.0.0.0", port=port)

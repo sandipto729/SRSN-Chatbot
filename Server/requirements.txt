@@ -7,6 +7,8 @@ python-dotenv==1.0.1
 langchain==0.1.17
 langchain-community==0.0.36
 langchain-core==0.1.48
+langchain-groq>=0.0.1
+
 
 
 # Embeddings

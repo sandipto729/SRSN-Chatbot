@@ -8,7 +8,9 @@ from langchain.memory import ConversationBufferWindowMemory
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
-from langchain.chat_models import init_chat_model
+from langchain_groq import ChatGroq
+
+
 
 # Load environment
 load_dotenv()
@@ -39,13 +41,13 @@ def process_url():
 
     try:
         # Initialize LLM
-        model = init_chat_model(
-            "llama3-8b-8192",
-            model_provider="groq",
+        model = ChatGroq(
+            model_name="llama3-8b-8192",
+            api_key=groq_api_key,
             temperature=0.6,
-            max_tokens=512,
-            api_key=groq_api_key
+            max_tokens=512
         )
+
 
         # Prompt template
         prompt_template = PromptTemplate(

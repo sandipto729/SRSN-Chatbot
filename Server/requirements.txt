@@ -1,21 +1,17 @@
-# Core backend
 Flask
 flask-cors
 python-dotenv
 
-# LangChain & components
 langchain
 langchain-community
+langchain-core
+langchain-groq
 
-
-# Embeddings
 sentence-transformers
-transformers
-
-
-# Vector store
 chromadb
+huggingface-hub
 
-# Optional: URL document loading support
 unstructured
-requests
+beautifulsoup4
+
+tqdm

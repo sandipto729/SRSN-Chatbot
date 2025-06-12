@@ -24,9 +24,7 @@ os.environ["GROQ_API_KEY"] = groq_api_key
 app = Flask(__name__)
 CORS(app, supports_credentials=True, resources={r"/*": {"origins": FRONTEND_URL}})
 
-# Load existing vectorstore (Chroma) from disk
-embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/all-MiniLM-L6-v2")
-vectorstore = Chroma(persist_directory="./chroma_doc_db", embedding_function=embedding, read_only=True)
+
 
 @app.route('/')
 def index():
@@ -40,6 +38,10 @@ def process_url():
         return jsonify({"error": "Query is required"}), 400
 
     try:
+
+        # Load existing vectorstore (Chroma) from disk
+        embedding = HuggingFaceEmbeddings(model_name="sentence-transformers/paraphrase-MiniLM-L3-v2")
+        vectorstore = Chroma(persist_directory="./chroma_doc_db", embedding_function=embedding, read_only=True)
         # Initialize LLM
         model = ChatGroq(
             model_name="llama3-8b-8192",

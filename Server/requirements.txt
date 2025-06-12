@@ -15,3 +15,4 @@ unstructured
 beautifulsoup4
 
 tqdm
+gunicorn

@@ -16,13 +16,9 @@ torch>=2.0.0
 # Vector store
 chromadb==0.4.24
 
-# Optional: URL document loading support
-unstructured==0.12.6
-requests==2.31.0
+# For GROQ support via LangChain
+groq==0.5.0  
 
-# For LLMs via Groq
-openai==1.30.1  # Sometimes needed internally
-tiktoken==0.6.0
-
-# (Optional but common utility)
+# Utility
 pydantic==2.6.4
+requests==2.31.0
